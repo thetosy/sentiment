@@ -1,0 +1,32 @@
+I need a conversation sentimental analysis for two speakers
+for example given transcript
+<data>
+Speaker_1: Hello, Dave. How are you?
+
+Speaker_2: Hi, Joseph. I’m good. Yesterday went for a run. What about you?
+
+Speaker_1: I’m fine. Today I will read a book. I like reading.
+</data>
+JSON output:
+{
+    "speaker_1": [
+        {
+            "sentiment_output": "likes a sport. It seems he cares about his health’.",
+        }
+    ]
+    "speaker_2":[
+        {
+            "sentiment_output": "pretends to be smart’."
+        }
+    ]
+}
+
+Provide conversation sentimatal analysis for the following transcript. The transcript of the conversation is between the <data> XML like tags.
+
+<data>
+{{transcript}}
+</data>
+
+Write the JSON output and nothing more.
+
+Here is the JSON output:
