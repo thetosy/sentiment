@@ -34,8 +34,7 @@ speaker_0: Hi. Is this the Crystal Heights Hotel in Singapore?
 speaker_1: Yes, it is. Good afternoon. How may I assist you today? 
 ```
 
-Using OpenAI API and prompt engineering, I am able to get a relevant insights from the GPT-4 model regarding the 
-conversation. 
+Using OpenAI API and prompt engineering, I am able to get a relevant insights from the conversation using the GPT-4 model.
 
 This is then displayed to the user. 
 
