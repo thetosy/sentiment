@@ -13,7 +13,6 @@ _ = load_dotenv(find_dotenv())
 
 
 def transcribe(file):
-    # use deepgram api to transcribe audio
     audio_url = {
         "url": file
     }
@@ -32,7 +31,6 @@ def transcribe(file):
 
 
 def extract_transcript(file_content):
-    # put transcript in a dialogue format
     output_text = ""
     current_speaker = None
 
@@ -59,7 +57,6 @@ def get_sentimental_result(output):
 
     client = openai.OpenAI()
 
-    # use one shot inference with instruction prompt
     with open('prompt_template.txt', "r") as file:
         template_string = file.read()
 
@@ -70,7 +67,6 @@ def get_sentimental_result(output):
     template = Template(template_string)
     prompt = template.render(data)
 
-    # use OpenAI model to get sentiment
     sentiment_response = client.chat.completions.create(
         model="gpt-4",
         temperature=0,
@@ -82,7 +78,6 @@ def get_sentimental_result(output):
 
 
 def handler(file):
-    # wrapper function
     try:
         transcript = transcribe(file)
         transcript = extract_transcript(transcript)
@@ -98,3 +93,9 @@ def handler(file):
         'body': result
     }
 
+
+def upload_file_to_gcs(client, file, filename, content_type):
+    bucket = client.bucket(os.environ['GC_BUCKET'])
+    blob = bucket.blob(filename)
+    blob.upload_from_file(file, content_type=content_type)
+    return blob
