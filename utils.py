@@ -8,33 +8,31 @@ from deepgram import (
     PrerecordedOptions,
     FileSource,
 )
+
 _ = load_dotenv(find_dotenv())
 
 
 def transcribe(file):
-    deepgram = DeepgramClient(os.environ['DEEPGRAM_API_KEY'])
-
-    with open(file, "rb") as file:
-        buffer_data = file.read()
-
-    payload: FileSource = {
-        "buffer": buffer_data,
+    # use deepgram api to transcribe audio
+    audio_url = {
+        "url": file
     }
+    deepgram = DeepgramClient(os.environ['DEEPGRAM_API_KEY'])
 
     options = PrerecordedOptions(
         model="nova-2",
         smart_format=True,
         diarize=True,
-        punctuate=True, 
-        )
+        punctuate=True,
+    )
 
-    response = deepgram.listen.prerecorded.v("1").transcribe_file(payload, options)
+    response = deepgram.listen.prerecorded.v("1").transcribe_url(audio_url, options)
 
     return response
 
 
 def extract_transcript(file_content):
-
+    # put transcript in a dialogue format
     output_text = ""
     current_speaker = None
 
@@ -44,14 +42,14 @@ def extract_transcript(file_content):
     for word in words:
         speaker_label = word['speaker']
         content = word['punctuated_word']
-        
+
         # Start the line with the speaker label:
         if speaker_label is not None and speaker_label != current_speaker:
             current_speaker = speaker_label
             output_text += f"\nspeaker_{current_speaker}: "
-        
+
         output_text += f"{content} "
-        
+
     return output_text
 
 
@@ -61,16 +59,18 @@ def get_sentimental_result(output):
 
     client = openai.OpenAI()
 
+    # use one shot inference with instruction prompt
     with open('prompt_template.txt', "r") as file:
         template_string = file.read()
 
     data = {
-    'transcript': output,
+        'transcript': output,
     }
-    
+
     template = Template(template_string)
     prompt = template.render(data)
 
+    # use OpenAI model to get sentiment
     sentiment_response = client.chat.completions.create(
         model="gpt-4",
         temperature=0,
@@ -82,6 +82,7 @@ def get_sentimental_result(output):
 
 
 def handler(file):
+    # wrapper function
     try:
         transcript = transcribe(file)
         transcript = extract_transcript(transcript)
