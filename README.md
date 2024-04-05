@@ -2,7 +2,9 @@
 
 This utilizes the [DeepGram Transcribe API](https://developers.deepgram.com/docs/getting-started-with-pre-recorded-audio) and Google Cloud Platform (App Engine and Cloud Storage) for deployment.
 
-I used the [FastAPI](https://fastapi.tiangolo.com) to deploy as RESTful API service which can be interacted with using the Swagger UI
+I used the [FastAPI](https://fastapi.tiangolo.com) to deploy as RESTful API service which can be interacted with using the Swagger UI.
+The application takes an audio file containing the conversation of two people and returns relevant information on both the
+individuals and what was being discussed.
 
 Click [here](https://anotherfastapi.uc.r.appspot.com) to use the application
 
@@ -20,8 +22,8 @@ Click [here](https://anotherfastapi.uc.r.appspot.com) to use the application
 
 ![execute.png](assets/execute.png)
 <p style="text-align: center;">Execute</p>
-To upload a file click on the drop down arrow "POST", then select "Try it out", click on "choose file" to upload a file 
-from your local computer, finally execute!
+To upload a file click on the drop down arrow "POST", then select "Try it out", click on "choose file" to upload an audio
+file of a dialogue between two people from your local computer, finally execute!
 
 
 When the user uploads the file, it is stored in a google cloud bucket which is subsequently accessed by DeepGram to get

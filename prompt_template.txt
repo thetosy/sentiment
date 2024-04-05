@@ -1,4 +1,4 @@
-I need a conversation sentimental analysis for two speakers
+I need a conversation sentimental analysis/insights for two speakers
 for example given transcript
 <data>
 Speaker_1: Hello, Dave. How are you?
@@ -21,7 +21,7 @@ JSON output:
     ]
 }
 
-Provide conversation sentimental analysis for the following transcript. The transcript of the conversation is between the <data> XML like tags.
+Provide conversation sentimental analysis/insights for the following transcript. The transcript of the conversation is between the <data> XML like tags.
 
 <data>
 {{transcript}}
