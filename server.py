@@ -1,4 +1,4 @@
-from utils import handler, upload_file_to_gcs
+from utils import handler, upload_file_to_gcs, format_results
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.responses import JSONResponse, RedirectResponse
 from dotenv import load_dotenv, find_dotenv
@@ -44,10 +44,7 @@ async def insight(file: UploadFile = File(...)):
                 content=json.dumps(results['body']),
             )
         if results['statusCode'] == 200:
-            formatted_results = {
-                "speaker_1": results['body']['speaker_0'][0]['sentiment_output'],
-                "speaker_2": results['body']['speaker_1'][0]['sentiment_output']
-            }
+            formatted_results = format_results(results['body']['num_speakers'], results)
             return JSONResponse(
                 status_code=200,
                 content=formatted_results,

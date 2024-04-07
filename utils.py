@@ -94,6 +94,14 @@ def handler(file):
     }
 
 
+def format_results(num_speakers, results):
+    formatted_results = {}
+    for i in range(num_speakers):
+        key = f"speaker_{i + 1}"
+        formatted_results[key] = results['body'][f'speaker_{i}'][0]['sentiment_output']
+    return formatted_results
+
+
 def upload_file_to_gcs(client, file, filename, content_type):
     bucket = client.bucket(os.environ['GC_BUCKET'])
     blob = bucket.blob(filename)
