@@ -23,7 +23,7 @@ Click [here](https://anotherfastapi.uc.r.appspot.com) to use the application
 ![execute.png](assets/execute.png)
 <p style="text-align: center;">Execute</p>
 To upload a file click on the drop down arrow "POST", then select "Try it out", click on "choose file" to upload an audio
-file of a dialogue between two people from your local computer, finally execute!
+file of a dialogue between at least two people from your local computer, finally execute!
 
 
 When the user uploads the file, it is stored in a google cloud bucket which is subsequently accessed by DeepGram to get
