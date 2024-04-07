@@ -3,7 +3,7 @@
 This utilizes the [DeepGram Transcribe API](https://developers.deepgram.com/docs/getting-started-with-pre-recorded-audio) and Google Cloud Platform (App Engine and Cloud Storage) for deployment.
 
 I used the [FastAPI](https://fastapi.tiangolo.com) to deploy as RESTful API service which can be interacted with using the Swagger UI.
-The application takes an audio file containing the conversation of atleast two people and returns relevant information on both the
+The application takes an audio file containing the conversation of atleast two people and returns relevant information on
 individuals and what was being discussed.
 
 Click [here](https://anotherfastapi.uc.r.appspot.com) to use the application
